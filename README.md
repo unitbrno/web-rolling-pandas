@@ -1,4 +1,4 @@
-# UnIT hackathon. team web-rolling-pandas
+# Team web-rolling-pandas @ UnIT Hackathon
 
 # Technology
 
@@ -26,9 +26,8 @@
 - Visualize the results in the timeline
 - Social media integration
     - share route in facebook?
-- default starting point from users location
-    - from phone gps
-
+- Default starting point from users location
+    - From phone gps
 
 # Backend
 
@@ -36,14 +35,15 @@
  - Route scheduling API
  - Results API
  - Calendar API
-    - Same as Results api but outputs ICS
+    - Same as the results API but outputs ICS
  - User management (nice to have)
 
-# Frontend 
-
-## API's 
+##  possible source API's 
 
  - google event's 
  - brno's own  api's
  - DPMB
  - IDOS
+# Frontend 
+
+

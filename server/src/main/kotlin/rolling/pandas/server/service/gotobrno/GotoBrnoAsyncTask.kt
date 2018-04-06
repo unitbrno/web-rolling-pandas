@@ -15,7 +15,7 @@ class GotoBrnoAsyncTask(
 
     private val log = loggerFor(javaClass)
 
-    @Scheduled(fixedDelay = 5000, fixedRate = 5 * 1000 * 60 * 60 * 24)
+    @Scheduled(initialDelay = 5 * 1000, fixedDelay = 5 * 1000 * 60 * 60 * 24)
     @Transactional
     fun loadEventsFromGotoBrno() {
         log.info("starting")

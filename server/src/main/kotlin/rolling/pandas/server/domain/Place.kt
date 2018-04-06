@@ -9,15 +9,15 @@ data class Place(
         @GeneratedValue
         var id: Long
 ) {
-    lateinit var name: String
-    lateinit var description: String
+    var name: String = ""
+    var description: String = ""
     @JsonProperty("icon_url")
-    lateinit var iconUrl: String
-    lateinit var type: String
+    var iconUrl: String = ""
+    var type: String = ""
     @Embedded
-    lateinit var location: Location
+    var location: Location = Location(0.0, 0.0)
     @ElementCollection
-    lateinit var tags: List<String>
+    var tags: List<String> = emptyList()
 
     override fun toString(): String {
         return "Place(id=$id, name='$name', description='$description', iconUrl='$iconUrl', type='$type', location=$location, tags=$tags)"

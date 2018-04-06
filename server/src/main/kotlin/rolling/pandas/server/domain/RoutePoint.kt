@@ -10,6 +10,6 @@ data class RoutePoint(
 
 ) {
     override fun toString(): String {
-        return "RoutePoint(location=$location, date=$date, name='$name')"
+        return "RoutePoint(location=$location, startTime=$date, name='$name')"
     }
 }

@@ -16,9 +16,10 @@ data class Event(
     @Embedded
     lateinit var location: Location
     lateinit var icon: String
-    lateinit var date: Date
+    lateinit var startTime: Date
+    lateinit var endTime: Date
     override fun toString(): String {
-        return "Event(id=$id, name='$name', location=$location, icon='$icon', date=$date)"
+        return "Event(id=$id, name='$name', location=$location, iconUrl='$icon', startTime=$startTime)"
     }
 
 

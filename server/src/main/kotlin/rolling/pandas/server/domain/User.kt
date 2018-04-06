@@ -10,12 +10,15 @@ data class User(
         @GeneratedValue
         val id: Long
 ) : UserDetails {
-    lateinit var login: String
-    lateinit var pass: String
-    lateinit var firstName: String
-    lateinit var lastName: String
+    var login: String = ""
+    var pass: String = ""
+    var firstName: String = ""
+    var lastName: String = ""
     @ElementCollection(fetch = FetchType.EAGER)
     lateinit var roles: Set<String>
+
+    @OneToMany
+    var savedRoutes: List<SavedRoute> = emptyList()
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> = roles.map { GrantedAuthority { it } }.toMutableList()
 

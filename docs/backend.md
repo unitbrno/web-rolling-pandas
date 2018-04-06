@@ -1,6 +1,6 @@
 # Data needed from the external APIs
 
-## Location API /location
+## Location API /place
 
 ### query parameters
 
@@ -60,10 +60,10 @@ Note: In this format the end coordinates for a transport event are found in the 
 
 ## Storage API /storage
 
-## input POST (json)
+### Input POST (json)
 
 See output of /route API
 
-## output GET /route/route\_id
+### Output GET /route/route\_id
 
  exactly the json stored with corresponding POST

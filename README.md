@@ -4,7 +4,7 @@
 
  - Angular at fronted
  - Kotlin in the backend
- - Maridb/mysql as DB
+ - Mariadb/mysql as DB
 
 # Features
 
@@ -12,22 +12,22 @@
 
  - Events search
  - Events scheduling
-  - "I want to be at Yacht at 23:00"
+    - "I want to be at Yacht at 23:00"
 - Find (best) route through multiple scheduled events if possible
 - Visualize the routes in google maps
 - Export the route to google calendar
 - Setting own event's
-  - example "Preparty at 405" 
-  - App needs to calculate applicable routes
+    - example "Preparty at 405" 
+    - App needs to calculate applicable routes
 
 
 ## Nice to have
 
 - Visualize the results in the timeline
 - Social media integration
-  - share route in facebook?
+    - share route in facebook?
 - default starting point from users location
-  - from phone gps
+    - from phone gps
 
 
 # Backend

@@ -25,6 +25,7 @@ class RouteCalculatorService {
                 routePoints.addAll(getRoute(routePoints.last(), place))
             }
         }
+        validateRoute(routePoints)
         return routePoints
     }
 
@@ -43,26 +44,26 @@ class RouteCalculatorService {
 
         val points = mutableListOf<RoutePoint>()
 
-        for (leg in route.get("legs").toList()){
-            for (step in leg.get("steps").toList()){
+        for (leg in route.get("legs").toList()) {
+            for (step in leg.get("steps").toList()) {
 
 
                 val description = step.get("html_instructions").textValue()
                 val detailUrl = ""
                 val travelMode = step.get("travel_mode").textValue()
 
-                val action = if(travelMode == "WALKING"){
+                val action = if (travelMode == "WALKING") {
                     "WALKING"
                 } else {
                     step.get("transit_details").get("line").get("vehicle").get("type").textValue()
                 }
-                val name = if(travelMode == "WALKING"){
+                val name = if (travelMode == "WALKING") {
                     description
                 } else {
                     step.get("transit_details").get("line").get("vehicle").get("name").textValue() +
                             " " + step.get("transit_details").get("line").get("short_name").textValue()
                 }
-                val startInt = if(travelMode == "WALKING"){
+                val startInt = if (travelMode == "WALKING") {
                     if (points.isEmpty()) {
                         leg.get("departure_time").get("value").asLong()
                     } else {
@@ -73,8 +74,8 @@ class RouteCalculatorService {
                 }
                 val endInt = step.get("duration").get("value").asLong() + startInt
 
-                val start  = Date(startInt * 1000)
-                val end  = Date(endInt * 1000)
+                val start = Date(startInt * 1000)
+                val end = Date(endInt * 1000)
 
                 val path = step.get("polyline").get("points").textValue()
                 val locationObj = step.get("end_location")
@@ -88,7 +89,6 @@ class RouteCalculatorService {
             }
             points.add(b)
         }
-
         return points
     }
 
@@ -99,5 +99,15 @@ class RouteCalculatorService {
         val dest = "destination=${b.location.latitude},${b.location.longitude}"
         val arrival = "arrival_time=${b.startTime.time/1000}"
         return "$static&$origin&$dest&$arrival"
+    }
+
+    fun validateRoute(route : List<RoutePoint>) {
+        var minDate = route[0].startTime
+        for (point in route){
+            if (minDate > point.startTime || point.startTime > point.endTime){
+                throw RuntimeException("scheduling is impossible")
+            }
+            minDate = point.endTime
+        }
     }
 }

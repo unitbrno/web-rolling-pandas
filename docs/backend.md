@@ -48,8 +48,8 @@ Output is a list of points
 - name : String
 - description : String (can be empty)
 - detail\_url : (can be empty)
-- type: "STAY|TRAM|BUS|WALK|TROLLEY"
-- path: String (polyline) | (polyline path from the next event to this one. Empty if previous event had type STAY or this is the first one)
+- action : "STAY|TRAM|BUS|WALK|TROLLEY"
+- path : String (polyline) | (polyline path from the next event to this one. Empty if previous event had type STAY or this is the first one)
 - lat : Double
 - lon : Double 
 - start : Datetime (yyyy-mm-dd hh:mm:ss).

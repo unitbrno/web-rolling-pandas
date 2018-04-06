@@ -46,15 +46,21 @@ class RouteCalculatorService {
         for (leg in route.get("legs").toList()){
             for (step in leg.get("steps").toList()){
 
-                val name = step.get("html_instructions").textValue()
-                val description = ""
+
+                val description = step.get("html_instructions").textValue()
                 val detailUrl = ""
                 val travelMode = step.get("travel_mode").textValue()
-                println(travelMode)
+
                 val action = if(travelMode == "WALKING"){
                     "WALKING"
                 } else {
                     step.get("transit_details").get("line").get("vehicle").get("type").textValue()
+                }
+                val name = if(travelMode == "WALKING"){
+                    description
+                } else {
+                    step.get("transit_details").get("line").get("vehicle").get("name").textValue() +
+                            " " + step.get("transit_details").get("line").get("short_name").textValue()
                 }
                 val startInt = if(travelMode == "WALKING"){
                     if (points.isEmpty()) {

@@ -21,14 +21,12 @@ Example
 
 ```json
 [{
- "name" : "Yacht Club"
- "description" : "Lorem ipsum dolor sit amet"
- "lat" : 1.337
- "lon" : 3.1459
+ "name" : "Yacht Club",
+ "description" : "Lorem ipsum dolor sit amet",
+ "lat" : 1.337,
+ "lon" : 3.1459,
  "icon_url" : "https://foo.bar/baz.jpg"
-}, 
-...
-]
+}]
     
 ```
 ## Routing api /route

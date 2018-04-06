@@ -35,6 +35,8 @@
  - Event search API
  - Route scheduling API
  - Results API
+ - Calendar API
+    - Same as Results api but outputs ICS
  - User management (nice to have)
 
 # Frontend 

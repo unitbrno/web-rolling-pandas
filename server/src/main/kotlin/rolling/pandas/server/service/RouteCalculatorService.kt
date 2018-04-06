@@ -49,7 +49,7 @@ class RouteCalculatorService {
                 val name = step.get("html_instructions").textValue()
                 val description = ""
                 val detailUrl = ""
-                val travelMode = step.get("travelMode").textValue()
+                val travelMode = step.get("travel_mode").textValue()
                 println(travelMode)
                 val action = if(travelMode == "WALKING"){
                     "WALKING"

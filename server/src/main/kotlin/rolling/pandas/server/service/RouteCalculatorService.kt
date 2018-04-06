@@ -34,8 +34,6 @@ class RouteCalculatorService {
         val restTemplate = RestTemplate()
 
         val url = createRequestUrl(a, b)
-        println(b.startTime)
-        println(url)
         val response = restTemplate.getForEntity(url, String::class.java)
 
 

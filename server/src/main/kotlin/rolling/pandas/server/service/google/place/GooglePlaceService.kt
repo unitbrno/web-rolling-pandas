@@ -9,8 +9,6 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.fasterxml.jackson.databind.module.SimpleModule
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.client.RestTemplate
 import rolling.pandas.server.domain.Location
@@ -53,16 +51,14 @@ class GooglePlaceService {
         return basicUrl
     }
 
-
-    @GetMapping("/brno")
     fun get(): List<Place> {
         val result = getPlacesInBrno()
         println("Loaded ${result.size} places ")
         return result
     }
 
-    @GetMapping("/query/{query}")
-    fun getByQuery(@PathVariable query: String): List<Place> {
+
+    fun getByQuery(query: String): List<Place> {
         val url = "https://maps.googleapis.com/maps/api/place/textsearch/json?key=$KEY&query=$query"
         val restTemplate = RestTemplate()
         val response = restTemplate.getForEntity(url, String::class.java)

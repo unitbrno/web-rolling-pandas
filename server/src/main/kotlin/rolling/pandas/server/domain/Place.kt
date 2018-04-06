@@ -23,5 +23,10 @@ data class Place(
         return "Place(id=$id, name='$name', description='$description', iconUrl='$iconUrl', type='$type', location=$location, tags=$tags)"
     }
 
+    fun weakEquals(other: Place): Boolean =
+            this.name == other.name
+                    && this.location == other.location
+                    && this.description == other.description
+
 
 }

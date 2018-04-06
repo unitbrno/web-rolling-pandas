@@ -7,5 +7,5 @@ import java.util.*
 
 @Service
 class RouteCalculatorService {
-    fun calculateRoute(points: List<Location>): List<RoutePoint> = points.map { RoutePoint(it, Date(), "dummy") }
+    fun calculateRoute(points: List<Location>): List<RoutePoint> = points.map { RoutePoint("name", "desc", "url", "action", "path", Location(42.0, 42.0), Date(), Date()) }
 }

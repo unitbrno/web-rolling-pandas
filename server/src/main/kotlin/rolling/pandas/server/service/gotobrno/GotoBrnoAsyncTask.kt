@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service
 import rolling.pandas.server.dao.EventRepository
 import rolling.pandas.server.domain.Event
 import rolling.pandas.server.loggerFor
-import javax.transaction.Transactional
 
 @Service
 class GotoBrnoAsyncTask(
@@ -16,7 +15,6 @@ class GotoBrnoAsyncTask(
     private val log = loggerFor(javaClass)
 
     @Scheduled(initialDelay = 5 * 1000, fixedDelay = 5 * 1000 * 60 * 60 * 24)
-    @Transactional
     fun loadEventsFromGotoBrno() {
         log.info("starting")
         val eventsInDatabase: List<Event> = eventRepository.findAll()

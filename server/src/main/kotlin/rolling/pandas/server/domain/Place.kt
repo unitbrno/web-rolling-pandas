@@ -16,7 +16,7 @@ data class Place(
     var type: String = ""
     @Embedded
     var location: Location = Location(0.0, 0.0)
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     var tags: List<String> = emptyList()
 
     override fun toString(): String {

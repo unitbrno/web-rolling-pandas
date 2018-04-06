@@ -26,7 +26,7 @@ class GotoBrnoParser {
 
     fun getEvents() = getAllLinksToEvents().map {
         try {
-            Thread.sleep(1000)
+            Thread.sleep(2000)
             return@map parseEvent(it)
         } catch (ex: Exception) {
             System.err.println("Error ${ex.message}")

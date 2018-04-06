@@ -23,6 +23,10 @@ class GooglePlaceAsyncTask(private val googlePlaceService: GooglePlaceService, p
                 .flatMap { topic ->
                     try {
                         return@flatMap googlePlaceService.getByQuery("$topic+brno")
+                                .map {
+                                    it.type = topic
+                                    it
+                                }
                     } catch (ex: Exception) {
                         log.error("Failed to load places in topic '$topic', reason: ${ex.message}")
                         return@flatMap emptyList<Place>()

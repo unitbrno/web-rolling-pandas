@@ -1,11 +1,9 @@
 package rolling.pandas.server.domain
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import java.util.*
-import javax.persistence.Embedded
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import org.hibernate.annotations.Type
+import java.time.LocalDateTime
+import javax.persistence.*
 
 @Entity
 data class Event(
@@ -13,17 +11,22 @@ data class Event(
         @GeneratedValue
         val id: Long
 ) {
+    var eventUrl: String? = null
+    @Type(type = "text")
+    var description: String? = null
+    @Column(unique = true)
     lateinit var name: String
+    var address: String? = null
     @Embedded
-    lateinit var location: Location
-    lateinit var icon: String
+    var location: Location = Location(0.0, 0.0)
+    var icon: String? = null
     @JsonProperty("start")
-    lateinit var startTime: Date
+    var startTime: LocalDateTime? = null
     @JsonProperty("end")
-    lateinit var endTime: Date
+    var endTime: LocalDateTime? = null
 
     override fun toString(): String {
-        return "Event(id=$id, name='$name', location=$location, icon='$icon', startTime=$startTime, endTime=$endTime)"
+        return "Event(id=$id, eventUrl=$eventUrl, description=$description, name='$name', address=$address, location=$location, icon=$icon, startTime=$startTime, endTime=$endTime)"
     }
 
 

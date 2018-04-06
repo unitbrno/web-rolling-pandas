@@ -1,15 +1,23 @@
 package rolling.pandas.server.domain
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import java.util.*
 
 data class RoutePoint(
+        val name: String,
+        val description: String,
+        @JsonProperty("detail_url")
+        val detailUrl: String,
+        val action: String,
+        val path: String,
         val location: Location,
-        val date: Date,
-        val name: String
-
-
+        @JsonProperty("start")
+        val startTime: Date,
+        @JsonProperty("end")
+        val endTime: Date
 ) {
+
     override fun toString(): String {
-        return "RoutePoint(location=$location, startTime=$date, name='$name')"
+        return "RoutePoint(name='$name', description='$description', detailUrl='$detailUrl', action='$action', path='$path', location=$location, startTime=$startTime, endTime=$endTime)"
     }
 }

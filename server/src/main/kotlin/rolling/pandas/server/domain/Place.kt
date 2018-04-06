@@ -1,5 +1,6 @@
 package rolling.pandas.server.domain
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 
 @Entity
@@ -10,6 +11,7 @@ data class Place(
 ) {
     lateinit var name: String
     lateinit var description: String
+    @JsonProperty("icon_url")
     lateinit var iconUrl: String
     lateinit var type: String
     @Embedded

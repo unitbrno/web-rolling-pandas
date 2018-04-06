@@ -13,8 +13,9 @@ List of objects with following attributes:
 
  - name : String
  - description : String (can be empty)
- - lat : Double
- - lon : Double
+ - location:
+    - lat : Double
+    - lon : Double 
  - icon\_url : String (url obviously)
 
 Example
@@ -23,9 +24,11 @@ Example
 [{
  "name" : "Yacht Club",
  "description" : "Lorem ipsum dolor sit amet",
- "lat" : 1.337,
- "lon" : 3.1459,
- "icon_url" : "https://foo.bar/baz.jpg"
+ "icon_url" : "https://foo.bar/baz.jpg",
+ "location" : {
+    "lat" : 1.337,
+    "lon" : 3.1459
+ }
 }]
     
 ```
@@ -36,8 +39,9 @@ Example
 Api takes a list events as json where user wants to be. Event contains following information:
 
 - name : String
-- lat : Double
-- lon : Double 
+- location:
+    - lat : Double
+    - lon : Double 
 - start : Datetime (yyyy-mm-dd hh:mm:ss).
 - end : Datetime (yyyy-mm-dd hh:mm:ss)
 
@@ -50,8 +54,9 @@ Output is a list of points
 - detail\_url : (can be empty)
 - action : "STAY|TRAM|BUS|WALK|TROLLEY"
 - path : String (polyline) | (polyline path from the next event to this one. Empty if previous event had type STAY or this is the first one)
-- lat : Double
-- lon : Double 
+- location:
+    - lat : Double
+    - lon : Double 
 - start : Datetime (yyyy-mm-dd hh:mm:ss).
 - end : Datetime (yyyy-mm-dd hh:mm:ss).
 

@@ -15,14 +15,22 @@ class GotoBrnoAsyncTask(
 
     private val log = loggerFor(javaClass)
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 5000, fixedRate = 5 * 1000 * 60 * 60 * 24)
     @Transactional
     fun loadEventsFromGotoBrno() {
         log.info("starting")
         val eventsInDatabase: List<Event> = eventRepository.findAll()
         val events = gotoBrnoParser.getEvents()
         val eventsToPersist = events.filter { newEvent -> !eventsInDatabase.any { it.name == newEvent.name } }
-        eventRepository.save(eventsToPersist)
-        log.info("persisted ${eventsToPersist.size} new events")
+        var errorCount = 0
+        for (event in eventsToPersist) {
+            try {
+                eventRepository.save(event)
+            } catch (e: Exception) {
+                errorCount++
+                log.error("Could not save event $event, reason: ${e.message}")
+            }
+        }
+        log.info("persisted ${eventsToPersist.size - errorCount} new events, $errorCount errors")
     }
 }

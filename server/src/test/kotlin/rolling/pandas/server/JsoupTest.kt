@@ -26,6 +26,20 @@ class JsoupTest {
     }
 
     @Test
+    fun parseTimeAsIntervalTest() {
+        val input = "12 may–30 june 2018"
+        val gotoBrnoParser = GotoBrnoParser()
+        println(gotoBrnoParser.parseTimeAsInterval(input))
+    }
+
+    @Test
+    fun parseTimeAsIntervalSameMonthTest() {
+        val input = "12–30 june 2018"
+        val gotoBrnoParser = GotoBrnoParser()
+        println(gotoBrnoParser.parseTimeAsInterval(input))
+    }
+
+    @Test
     fun parseTimeTest() {
         val gotoBrnoParser = GotoBrnoParser()
         val actual = gotoBrnoParser.parseDuration("19:00-20:00")

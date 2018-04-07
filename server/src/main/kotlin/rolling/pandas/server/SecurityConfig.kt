@@ -1,8 +1,10 @@
 package rolling.pandas.server
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.annotation.Order
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -14,12 +16,21 @@ import rolling.pandas.server.service.PandaUserDetailsService
 
 @EnableWebSecurity
 @Configuration
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 class SecurityConfig(private val pandaUserDetailsService: PandaUserDetailsService) : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
-        http.csrf().disable().
-                authorizeRequests()
+        http.formLogin()
+                .loginProcessingUrl("/mlogin")
+                .usernameParameter("login")
+                .passwordParameter("pass")
+                .and()
+                .authorizeRequests()
+                .antMatchers("/index.html", "/", "home", "/mlogin").permitAll()
                 .anyRequest()
-                .permitAll()
+                .authenticated().and().csrf().disable()
+
+        //csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+
     }
 
     @Bean
@@ -35,6 +46,7 @@ class SecurityConfig(private val pandaUserDetailsService: PandaUserDetailsServic
 
     @Autowired
     fun configureGlobal(auth: AuthenticationManagerBuilder) {
-        auth.authenticationProvider(authenticationProvider())
+        //auth.authenticationProvider(authenticationProvider())
+        auth.inMemoryAuthentication().withUser("user").password("pass").roles("USER")
     }
 }

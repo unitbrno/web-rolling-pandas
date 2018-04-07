@@ -28,7 +28,7 @@ class SecurityConfig(private val pandaUserDetailsService: PandaUserDetailsServic
                 .authorizeRequests()
                 .antMatchers("/index.html", "/", "home", "/mlogin").permitAll()
                 .anyRequest()
-                .authenticated().and().csrf().disable()
+                .permitAll().and().csrf().disable()
 
         //csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 

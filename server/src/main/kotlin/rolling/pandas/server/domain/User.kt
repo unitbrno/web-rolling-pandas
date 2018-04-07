@@ -12,10 +12,11 @@ data class User(
 ) : UserDetails {
     var login: String = ""
     var pass: String = ""
+    val email: String = ""
     var firstName: String = ""
     var lastName: String = ""
     @ElementCollection(fetch = FetchType.EAGER)
-    lateinit var roles: Set<String>
+    var roles: Set<String> = emptySet()
 
     @OneToMany
     var savedRoutes: List<SavedRoute> = emptyList()
@@ -33,10 +34,8 @@ data class User(
     override fun isAccountNonExpired(): Boolean = true
 
     override fun isAccountNonLocked(): Boolean = true
-
     override fun toString(): String {
-        return "User(id=$id, login='$login', password='$password', firstName='$firstName', lastName='$lastName', roles=$roles)"
+        return "User(id=$id, login='$login', email='$email', firstName='$firstName', lastName='$lastName', roles=$roles, savedRoutes=$savedRoutes)"
     }
-
 
 }

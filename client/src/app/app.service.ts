@@ -39,4 +39,12 @@ export class AppService {
     }
   }
 
+  register(credentials: { username: string; password: string; email: string }, callback: () => void) {
+    console.log(credentials.username, credentials.email, credentials.password);
+    this.http.post(this.baseUrlService.baseUrl + 'user', credentials).subscribe(response => {
+      if (callback) {
+        callback();
+      }
+    });
+  }
 }

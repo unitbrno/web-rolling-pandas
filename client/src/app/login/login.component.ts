@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  credentials = {username: '', password: ''};
+  credentials = {username: '', password: '', email: ''};
 
   constructor(private appService: AppService, private http: HttpClient, private router: Router) {
   }
@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login() {
-    this.appService.authenticate(this.credentials, () => {
+  register() {
+    this.appService.register(this.credentials, () => {
       this.router.navigateByUrl('/');
     });
     return false;

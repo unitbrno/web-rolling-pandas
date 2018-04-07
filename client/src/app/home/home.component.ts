@@ -10,11 +10,7 @@ import {BaseUrlService} from "../base-url.service";
 })
 export class HomeComponent implements OnInit {
 
-  title = 'Demo';
-  greeting = {};
-
   constructor(private baseUrlService: BaseUrlService, private app: AppService, private http: HttpClient) {
-    http.get(baseUrlService.baseUrl + 'resource').subscribe(data => this.greeting = data);
   }
 
   ngOnInit() {

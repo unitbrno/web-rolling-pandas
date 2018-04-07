@@ -1,5 +1,6 @@
 package rolling.pandas.server.service.gotobrno
 
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 import rolling.pandas.server.dao.EventRepository
 import rolling.pandas.server.domain.Event
@@ -13,7 +14,7 @@ class GotoBrnoAsyncTask(
 
     private val log = loggerFor(javaClass)
 
-    //@Scheduled(initialDelay = 5 * 1000, fixedDelay = 1000 * 60 * 10)
+    @Scheduled(initialDelay = 1000 * 60 * 10, fixedDelay = 1000 * 60 * 10)
     fun loadEventsFromGotoBrno() {
         log.info("starting")
         val eventsInDatabase: List<Event> = eventRepository.findAll()

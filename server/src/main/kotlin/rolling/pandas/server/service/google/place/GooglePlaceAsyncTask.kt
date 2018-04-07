@@ -1,5 +1,6 @@
 package rolling.pandas.server.service.google.place
 
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 import rolling.pandas.server.dao.PlaceRepository
 import rolling.pandas.server.domain.Place
@@ -12,7 +13,7 @@ class GooglePlaceAsyncTask(private val googlePlaceService: GooglePlaceService, p
 
     private val log = loggerFor(javaClass)
 
-    //@Scheduled(initialDelay = 5 * 1000, fixedDelay = 1000 * 60 * 10)
+    @Scheduled(initialDelay = 1000, fixedDelay = 1000 * 60 * 10)
     @Transactional
     fun getAllPlaces() {
         log.info("started")

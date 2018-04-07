@@ -37,7 +37,7 @@ inline fun <reified T : Any> typeRef(): TypeReference<T> = object : TypeReferenc
 @Service
 @RestController
 class GooglePlaceService {
-    private val KEY = "AIzaSyBWSRUkWSrChcNWNevU1pJktMb61aoA3Lg"
+    private val KEY = "AIzaSyARqZUJ24t-N6voxrSZvT5iRxQ8aHEsWPc"
     private val LOCATION_OF_BRNO = Location(49.196227, 16.617108)
     private val RADIUS_IN_METER = 10000
 

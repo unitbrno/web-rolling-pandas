@@ -12,26 +12,23 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository
 import rolling.pandas.server.service.PandaUserDetailsService
+import rolling.pandas.server.service.SpringAuthenticationSuccessHandler
 
 @EnableWebSecurity
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-class SecurityConfig(private val pandaUserDetailsService: PandaUserDetailsService) : WebSecurityConfigurerAdapter() {
+class SecurityConfig(private val pandaUserDetailsService: PandaUserDetailsService, private val springAuthenticationSuccessHandler: SpringAuthenticationSuccessHandler) : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         http.formLogin()
-                .loginProcessingUrl("/mlogin")
-                .usernameParameter("login")
-                .passwordParameter("pass")
-                .successForwardUrl("/toClient")
+                .loginPage("/login")
+                .defaultSuccessUrl("/home")
+                .successHandler(springAuthenticationSuccessHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/index.html", "/", "home", "/mlogin").permitAll()
-                .anyRequest()
-                .permitAll().and().csrf().disable()
-
-        //csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-
+                .antMatchers("/index.html", "/", "home", "/login", "/login-api", "/register").authenticated()
+                .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
     }
 
     @Bean

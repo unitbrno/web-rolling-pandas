@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+       #map {
+        height: 900px;
+        width: 100%;
+       }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.min.js" integrity="sha256-DELCOgoVsZqjT78lDC7zcX+YFp+PEjh1k23mBMoDBwo=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+    <script>
+      var map;
+      function formatDate(d){
+      return moment(d).format("HH:mm");
+      }
+      function addInfomarker(point, pos){
+           var marker = new google.maps.Marker({
+              position: { lat: pos.lat, lng : pos.lon},
+              map: map,
+              title: point.name
+            });
+            marker.addListener('click', function() {
+              var infow = new google.maps.InfoWindow({
+                content: point.name + "<br>"+point.description + "<br>" + formatDate(point.start) +" - "+ formatDate(point.end)
+              });
+              infow.open(map, marker);
+            });
+
+      }
+      function initMap() {
+        var brno = {lat:49.2094833, lng: 16.5863712};
+
+          map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: brno
+        });
+        for (var i=0; i < mapdata.length; i++){
+            
+            
+            var item = mapdata[i];
+            if (item.action != "STAY" && item.path.length > 0){
+               var path = google.maps.geometry.encoding.decodePath(item.path);
+               var pl = new google.maps.Polyline({
+                      path: path,
+                      geodesic: true,
+                      strokeColor: item.action == "WALKING" ? '#00AAAA' : '#FF0000',
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2
+                });
+                pl.setMap(map);
+
+            }
+            if (item.action != "WALKING"){
+               var pos = item.action == "STAY" ? item.location : mapdata[i-1].location;
+               addInfomarker(item, pos);
+
+            }
+            
+        }
+      }
+    var mapdata = [
+    {
+        "action": "STAY",
+        "description": "Dummy Description 1",
+        "detail_url": "http://foo.bar/baz",
+        "end": "2018-04-07T10:35:00.000+0000",
+        "location": {
+            "lat": 49.229857,
+            "lon": 16.576634
+        },
+        "name": "Event 1",
+        "path": "",
+        "start": "2018-04-07T09:00:00.000+0000"
+    },
+    {
+        "action": "WALKING",
+        "description": "Walk to Vozovna Medl\u00e1nky",
+        "detail_url": "",
+        "end": "2018-04-07T12:50:45.000+0000",
+        "location": {
+            "lat": 49.235569,
+            "lon": 16.585596
+        },
+        "name": "Walk to Vozovna Medl\u00e1nky",
+        "path": "adnkHcpddBhBeCYQWQ{@q@OOo@m@E@aA{@WUIKCEIIQWUYIQEECIEICKEOCKCKCMAKAIAK?SAS@U@WBUBYSIEAEEOQEIGOmAyCeAqCuBsFkAaD]cAWmACECCCACAG?E?q@`@gAl@o@^oAsCAEgAqCi@sAEKCGCCCACCECIAWIATKt@HB",
+        "start": "2018-04-07T12:36:44.000+0000"
+    },
+    {
+        "action": "BUS",
+        "description": "Bus towards Kr\u00e1lovo Pole, n\u00e1dra\u017e\u00ed",
+        "detail_url": "",
+        "end": "2018-04-07T12:54:00.000+0000",
+        "location": {
+            "lat": 49.2280553,
+            "lon": 16.5934377
+        },
+        "name": "Bus 41",
+        "path": "iiokH_kfdBvUcWdW{W",
+        "start": "2018-04-07T12:51:00.000+0000"
+    },
+    {
+        "action": "WALKING",
+        "description": "Walk to Bo\u017eet\u011bchova 2, 612 00 Brno-Kr\u00e1lovo Pole, Czechia",
+        "detail_url": "",
+        "end": "2018-04-07T12:57:27.000+0000",
+        "location": {
+            "lat": 49.2273319,
+            "lon": 16.5956573
+        },
+        "name": "Walk to Bo\u017eet\u011bchova 2, 612 00 Brno-Kr\u00e1lovo Pole, Czechia",
+        "path": "kzmkH_|gdBKNm@{Ay@oB_@_AXUvAaAHEJGv@a@r@]p@Y",
+        "start": "2018-04-07T12:54:00.000+0000"
+    },
+    {
+        "action": "STAY",
+        "description": "Dummy Description 2",
+        "detail_url": "http://foo.bar/baz",
+        "end": "2018-04-07T14:00:00.000+0000",
+        "location": {
+            "lat": 49.227334,
+            "lon": 16.595667
+        },
+        "name": "Event 2",
+        "path": "",
+        "start": "2018-04-07T13:00:00.000+0000"
+    },
+    {
+        "action": "WALKING",
+        "description": "Walk to Semilasso",
+        "detail_url": "",
+        "end": "2018-04-07T15:36:00.000+0000",
+        "location": {
+            "lat": 49.228229,
+            "lon": 16.592092
+        },
+        "name": "Walk to Semilasso",
+        "path": "yumkH{ihdBVKlAvLLbA_E~Bw@f@c@VOHBN",
+        "start": "2018-04-07T15:30:26.000+0000"
+    },
+    {
+        "action": "TRAM",
+        "description": "Tram towards E\u010derova",
+        "detail_url": "",
+        "end": "2018-04-07T15:52:00.000+0000",
+        "location": {
+            "lat": 49.191185,
+            "lon": 16.611879
+        },
+        "name": "Tram 1",
+        "path": "m{mkHqsgdB`]iQrMwGzZuOlO{H`TgK~OyHp\\_PpWeF`Vc`@hZhH",
+        "start": "2018-04-07T15:36:00.000+0000"
+    },
+    {
+        "action": "WALKING",
+        "description": "Walk to N\u00e1dra\u017en\u00ed 654/10, 602 00 Brno-st\u0159ed-Brno-m\u011bsto, Czechia",
+        "detail_url": "",
+        "end": "2018-04-07T15:53:10.000+0000",
+        "location": {
+            "lat": 49.1907782,
+            "lon": 16.61078
+        },
+        "name": "Walk to N\u00e1dra\u017en\u00ed 654/10, 602 00 Brno-st\u0159ed-Brno-m\u011bsto, Czechia",
+        "path": "{sfkHgokdBGDBL@@?@?@A@CB?FFPDPFJDHFFDBBBBDDLDHXjA",
+        "start": "2018-04-07T15:52:00.000+0000"
+    },
+    {
+        "action": "STAY",
+        "description": "Dummy Description 3",
+        "detail_url": "http://foo.bar/baz",
+        "end": "2018-04-07T17:00:00.000+0000",
+        "location": {
+            "lat": 49.19083,
+            "lon": 16.610737
+        },
+        "name": "Event 3",
+        "path": "",
+        "start": "2018-04-07T16:00:00.000+0000"
+    }
+];
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaTKOR9pOG96d08K5Ro_IRvpUqTHbZfNo&libraries=geometry&callback=initMap">
+        </script>
+  </body>
+</html>

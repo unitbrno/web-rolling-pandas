@@ -23,6 +23,7 @@ class SecurityConfig(private val pandaUserDetailsService: PandaUserDetailsServic
                 .loginProcessingUrl("/mlogin")
                 .usernameParameter("login")
                 .passwordParameter("pass")
+                .successForwardUrl("/toClient")
                 .and()
                 .authorizeRequests()
                 .antMatchers("/index.html", "/", "home", "/mlogin").permitAll()

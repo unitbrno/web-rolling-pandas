@@ -18,6 +18,8 @@ export class PlacesComponent implements OnInit {
   constructor(private placeService: PlaceService) { }
 
   ngOnInit() {
-    this.placeService.getPlaces("Yacht").subscribe(places => this.places = places);
+  }
+  search () {
+    this.placeService.getPlaces(this.searchTerm).subscribe(places => this.places = places);
   }
 }

@@ -1,9 +1,12 @@
 <div>
-  <label> searching for {{ searchTerm }} <br>
+  <label>
     <input [(ngModel)]="searchTerm">
   </label>
-  <div *ngFor="let place of places">
-    <img src="{{ place.icon_url }}">
-    {{ place.name }}
+  <button (click)="search()">Search</button>
+  <div id="places">
+    <div class="place" *ngFor="let place of places">
+      <img class="placeicon" src="{{ place.icon_url }}">
+      {{ place.name }}
+    </div>
   </div>
 </div>

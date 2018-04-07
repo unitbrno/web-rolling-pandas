@@ -1,13 +1,11 @@
 package rolling.pandas.server.controller
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import rolling.pandas.server.dao.PlaceRepository
 import rolling.pandas.server.domain.Place
 import rolling.pandas.server.loggerFor
 
+@CrossOrigin("localhost:4200")
 @RestController
 @RequestMapping("/place")
 class PlaceController(private val placeRepository: PlaceRepository) {

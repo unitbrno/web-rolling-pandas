@@ -37,18 +37,21 @@
           <div class="col-md-12">
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a href="" class="active nav-link" data-toggle="tab" data-target="#tabone">Browse by search</a>
+                <a href="" class="active nav-link" data-toggle="tab" data-target="#tabone">Browse by interest</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="" data-toggle="tab" data-target="#tabtwo">Browse by map</a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link" data-toggle="tab" data-target="#tabthree">Browse by interest</a>
+                <a href="" class="nav-link" data-toggle="tab" data-target="#tabthree">Browse by search</a>
               </li>
             </ul>
             <div class="tab-content mt-2">
               <div class="tab-pane fade show active" id="tabone" role="tabpanel">
-                <input type="text" class="form-control form-control-lg mb-4" placeholder="Route name">
+                <div class="input-group my-1 form-inline">
+                  <input type="text" class="form-control mr-3 my-1 w-50" placeholder="Your mail">
+                  <button type="submit" class="btn btn-secondary">Subscribe</button>
+                </div>
                 <div class="list-group">
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                     <div class="d-flex w-100 justify-content-between">
@@ -67,11 +70,6 @@
               <div class="tab-pane fade" id="tabthree" role="tabpanel">
                 <p class=""> </p>
                 <div class="container">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <h1 class="mb-4 text-white">Best pictures</h1>
-                    </div>
-                  </div>
                   <div class="row">
                     <div class="col-md-3 col-6 p-1">
                       <a href="#">
@@ -203,9 +201,7 @@
         }
       }
   </script>
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:180px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo&nbsp;&nbsp;
-    <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
-  </pingendo>
+
 </body>
 
 </html>
